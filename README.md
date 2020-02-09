@@ -1,6 +1,8 @@
 # Bachelor-Thesis_Ivan-Shtetinski
 Open Questions and Essays Assessment Tool
+
 #Pre-requirements:
+
 -Python 3+ and the latest version of pip (https://pip.pypa.io/en/stable/installing/)
 
 #To install the modules that are used, type the following into the terminal:
