@@ -36,7 +36,7 @@ lemma = nltk.WordNetLemmatizer()
 spell = SpellChecker()
 stop_words = stopwords.words('english')
 regex = re.compile(
-    '[%s]' % re.escape(string.punctuation.replace('-'.'')))
+    '[%s]' % re.escape(string.punctuation.replace('-','')))
 
 def tokenizing(text):
     text = tokenizer.tokenize(text)
@@ -44,12 +44,7 @@ def tokenizing(text):
 
 def remove_punct(text):
     text = text.replace("/", " or ")
-    #text = text.replace("("," ")
-    #text = text.replace(")"," ")
     text = regex.sub('', text)
-    #text = text.translate(str.maketrans('','', string.punctuation))
-    '''text = "".join([word for word in text
-        if word not in string.punctuation])'''
     return text
 
 def remove_stopwords(text):
@@ -161,7 +156,7 @@ def generate_prediction(text):
         text_explainer.fit(text, 
             GraphicUserInterfaces.classifier.predict_proba)
         prediction_string = text_explainer.show_prediction(
-            top=(15,15),targets=[3]).data
+            top=(10,10),targets=[3]).data
 
         soup = BeautifulSoup(prediction_string, 'html.parser')
         span_list = []
@@ -172,34 +167,23 @@ def generate_prediction(text):
             for item in span_list:
                 html_file.write("%s\n" % item)
     else:
-        if os.path.isfile("images/index.html"):
-            os.remove("images/index.html")
-
         tk.messagebox.showinfo("Error", "No training file uploaded")
 
 class GraphicUserInterfaces():
-    '''
-Class GraphicUserInterfaces includes all the used gui's and functions which
-creates windows and widgets.
-    '''
     uploaded_files = []
     current_file = None
     classifier = None
 
     def __init__(self):
-
         self.root = tk.Tk()
         self.root.title(MY_TITLE)
         self.root.geometry("300x200")
-
         self.menubar = tk.Menu(self.root)
         self.menubar.add_command(label="How to use",
             command=self.instructions)
         self.instructions_menu = tk.Menu(self.menubar, tearoff=0)
-
         self.top_frame = tk.Frame(self.root).pack(side=tk.TOP)
         self.bottom_frame = tk.Frame(self.root).pack(side=tk.BOTTOM)
-
         self.welcome_lbl = tk.Label(self.top_frame,
             text = "Welcome to the {}".format(MY_TITLE)).pack(side=tk.TOP)
 
@@ -228,7 +212,6 @@ creates windows and widgets.
             title="Select a file to train the classifier: ", filetypes=MY_FILETYPES)
         file = pd.read_csv(filename, sep='\t')
         train_data = file['Essay']
-        train_data = preprocessing(train_data)
         train_label = file['Grade']
         GraphicUserInterfaces.classifier = train_classifier(train_data, train_label)
 
