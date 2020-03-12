@@ -49,7 +49,7 @@ to download different packadges from the NLTK module run python via the command 
 
 #How to run:
 
--extract the images and data folders in the same directory as the python file.(They aren't really needed, as the program generates new images and you can work with any files on your machine, but for convinience its recomended. In any gase, make sure you have a folder named images in the same directory as the Asessment_Tool.py file)
+-extract the images and data folders in the same directory as the python file.(They aren't really needed, as the program generates new images and you can work with any files on your machine, but for convinience its recomended. In any case, make sure you have a folder named images in the same directory as the Asessment_Tool.py file)
 
 -run the Asessment_Tool.py file
 
